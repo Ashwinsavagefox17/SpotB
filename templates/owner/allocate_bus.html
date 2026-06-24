@@ -1,0 +1,221 @@
+{% include 'owner/owner_header.html' %}
+<br>
+
+
+<style>
+    body {
+
+        background-image: url("static/img/b1.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(0, 0, 0, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+
+
+    html {
+        font-family: "didot";
+    }
+
+    h2 {
+        font-size: 60px;
+        margin: 80px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: .9;
+
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+</style>
+
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <h2 class="text-dark text-left rotate">ALLOCATE BUS</h2>
+    
+            </div>
+            <div class="col-lg">
+    
+                <br>
+                <br>
+                <br>
+                <br>
+    
+                <form method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                <select name="route" id="route-select">
+                                    <option value="">Select Route</option>
+                                    {% for i in q %}
+                                    <option value="{{ i.id }}">{{ i.routes_start }} to {{ i.routes_End }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="stops-container">
+                                    <!-- Stops will be displayed here -->
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="driver" id="bus-select">
+                                    <option value="">Select Driver</option>
+                                    {% for i in q1 %}
+                                    <option value="{{ i.id }}">{{ i.driver_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+    
+    
+                        <tr>
+                            <td><input type="submit" name="submit"></td>
+                        </tr>
+                    </table>
+    
+                </form>
+    
+    
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Driver</th>
+                        <th>Route</th>
+                        <th>Bus</th>
+                        <th>Owner</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+
+                    </tr>
+                    {% for i in qa %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.DRIVER.driver_name}}</td>
+                        <td>{{i.ROUTE.routes_start}} to {{i.ROUTE.routes_End}}</td>
+                        <td>{{i.BUS.bus_name}}</td>
+                        <td>{{i.OWER.ower_name}}</td>
+                        <td><a href="/delete_allocate/{{i.id}}"
+                                onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                        <td><a href="/owner_manage_trip/{{i.id}}">Trip</a></td>
+    
+    
+                    </tr>
+                    {% endfor %}
+                </table>
+    
+    
+            </div>
+        </div>
+    </div>
+    
+        
+    <br>
+    <br>
+    <br>
+
+    <script>
+        document.getElementById('route-select').addEventListener('change', function () {
+            var route_id = this.value;
+            if (route_id) {
+                fetch(`/get_stops/${route_id}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var stopsContainer = document.getElementById('stops-container');
+                        stopsContainer.innerHTML = '';
+                        if (data.stops.length > 0) {
+                            var ul = document.createElement('ul');
+                            data.stops.forEach(stop => {
+                                var li = document.createElement('li');
+                                li.textContent = stop;
+                                ul.appendChild(li);
+                            });
+                            stopsContainer.appendChild(ul);
+                        } else {
+                            stopsContainer.textContent = 'No stops available for this route.';
+                        }
+                    });
+            } else {
+                document.getElementById('stops-container').innerHTML = '';
+            }
+        });
+    </script>
+
+</body>
+
+
+{% include 'footer.html' %}

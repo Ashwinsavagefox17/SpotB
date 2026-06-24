@@ -1,0 +1,123 @@
+{%include 'owner/owner_header.html'  %}
+<br>
+<br>
+<br>
+<br>
+
+<style>
+    body {
+
+        background-image: url("/static/img/b2.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(0, 0, 0, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+
+
+    html {
+        font-family: "didot";
+    }
+
+    h2 {
+        font-size: 60px;
+        margin: 80px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: .9;
+
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <h2 class="text-dark text-left rotate">Track</h2>
+
+        </div>
+        <br><br><br><br>
+        <div class="col-lg">
+            <td><a class="btn btn-outline-light" href="http://www.google.com/maps?q={{ i.lati }},{{ i.longi }}">TRACK</a></td>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{%include 'footer.html'  %}
+

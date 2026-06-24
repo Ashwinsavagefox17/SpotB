@@ -1,0 +1,130 @@
+{% include 'admin/admin_header.html' %}
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1 text-center">
+            <img src="/static/images/b1.png" width="380px" alt="Bus Image">
+            <h2 class="text-dark rotate"> View Buses</h2>
+        </div>
+        <div class="col-lg-11">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Bus Name</th>
+                        <th>Bus Number</th>
+                        <th>Bus Route</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in q2 %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.bus_name }}</td>
+                        <td>{{ i.bus_number }}</td>
+                        <td>{{ i.ROUTE.routes_start }} to {{ i.ROUTE.routes_End }}</td>
+                        <td>{{ i.status }}</td>
+                        <td>
+                            {% if i.status == 'Active' %}
+                                <a href="/block/{{ i.id }}">Block</a>
+                            {% else %}
+                                <a href="/unblock/{{ i.id }}">Activate</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    html {
+        font-family: "Didot", serif;
+    }
+
+    h2 {
+        font-size: 70px;
+        margin: 20px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: 0.7;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+    body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #1b1750;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(34, 31, 70, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+<br><br><br><br><br><br><br>
+
+{% include 'footer.html' %}

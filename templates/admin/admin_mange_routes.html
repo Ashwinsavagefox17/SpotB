@@ -1,0 +1,171 @@
+{% include 'admin/admin_header.html' %}
+<br><br><br><br><br><br><br><br>
+<style>
+    html {
+        font-family: "Didot", serif;
+    }
+
+    h2 {
+        font-size: 70px;
+        margin: 20px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: 0.7;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+    body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #1b1750;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(34, 31, 70, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th, td {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1">
+            <h2 class="text-dark rotate">Manage Routes</h2>
+        </div>
+        <div class="col-lg-11">
+            {% if q2 %}
+            <form method="post">
+                <table>
+                    <tr>
+                        <th>Routes Start</th>
+                        <td>
+                            <select name="routes_start" id="routes_start">
+                                <option value="South" {% if q2.ROUTE.routes_start == 'South' %} selected {% endif %}>South</option>
+                                <option value="North" {% if q2.ROUTE.routes_start == 'North' %} selected {% endif %}>North</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Routes End</th>
+                        <td>
+                            <select name="routes_End" id="routes_End">
+                                <option value="Kaloor" {% if q2.ROUTE.routes_End == 'Kaloor' %} selected {% endif %}>Kaloor</option>
+                                <option value="JLN" {% if q2.ROUTE.routes_End == 'JLN' %} selected {% endif %}>JLN</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit"></td>
+                    </tr>
+                </table>
+            </form>
+            {% else %}
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <th>Routes Start</th>
+                        <td>
+                            <select name="routes_start" id="routes_start">
+                                <option value="South">South</option>
+                                <option value="North">North</option>
+                                <option value="Etumanoor">Etumanoor</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Routes End</th>
+                        <td>
+                            <select name="routes_End" id="routes_End">
+                                <option value="Kaloor">Kaloor</option>
+                                <option value="JLN">JLN</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Route Start</th>
+                    <th>Route End</th>
+                    <th>Actions</th>
+                </tr>
+                {% for i in q1 %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.routes_start }}</td>
+                    <td>{{ i.routes_End }}</td>
+                    <td>
+                        <a href="/update_routes/{{ i.id }}">Update</a> |
+                        <a href="/delete_routes/{{ i.id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a> |
+                        <a href="/admin_manage_stops/{{ i.id }}">Add Stops</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+
+{% include 'footer.html' %}

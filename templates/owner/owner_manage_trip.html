@@ -1,0 +1,171 @@
+{%include 'owner/owner_header.html' %}
+
+
+
+<style>
+    body {
+
+        background-image: url("/static/img/b2.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(0, 0, 0, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+
+
+    html {
+        font-family: "didot";
+    }
+
+    h2 {
+        font-size: 60px;
+        margin: 80px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: .9;
+
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+</style>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <h2 class="text-dark text-left rotate"> BUS TRIPS</h2>
+
+        </div>
+        <div class="col-lg">
+            <br>
+            <br>
+            <br>
+            <br>
+            <form action="" method="post">
+
+                <table>
+                    <tr>
+                        <th>Start Time</th>
+                        <td><input type="time" name="start_time"></td>
+                    </tr>
+                    <tr>
+                        <th>End Time</th>
+                        <td><input type="time" name="End_time"></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" name="submit"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Bus</th>
+                    <th>Route</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th></th>
+                </tr>
+                {% for i in q1 %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.ALLOCATION.BUS.bus_name}}</td>
+                    <td>{{i.ALLOCATION.ROUTE.routes_start}} to {{i.ALLOCATION.ROUTE.routes_End}}</td>
+                    <td>{{i.start_time}}</td>
+                    <td>{{i.End_time}}</td>
+                    <td><a href="/delete_trip/{{i.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%include 'footer.html' %}

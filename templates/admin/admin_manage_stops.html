@@ -1,0 +1,245 @@
+{% include 'admin/admin_header.html' %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+ html {
+        font-family: "Didot", serif;
+    }
+
+    h2 {
+        font-size: 70px;
+        margin: 20px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: 0.7;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+
+   
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #1b1750;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(34, 31, 70, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col_lg-2">
+            <h2 class="text-dark rotate"> Stops</h2>
+
+        </div>
+        <div class="col_lg">
+            
+
+{% if q2 %}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>Point Name</th>
+            <td><input type="text" name="point_name" value="{{ q2.point_name }}"></td>
+        </tr>
+        <tr>
+            <th>Stop No</th>
+            <td><input type="number" name="stop_no" value="{{ q2.stop_no }}"></td>
+        </tr>
+        <tr>
+            <th>Charges</th>
+            <td>
+                <select name="charges" required>
+                    <option value="">Select Charges</option>
+                    <option value="15" {% if q2.charge == '15' %} selected {% endif %}>15</option>
+                    <option value="18" {% if q2.charge == '18' %} selected {% endif %}>18</option>
+                    <option value="20" {% if q2.charge == '20' %} selected {% endif %}>20</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Latitude</th>
+            <td><input type="text" name="latitude" id="latitude" value="{{ q2.lattitude }}" readonly></td>
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            <td><input type="text" name="longitude" id="longitude" value="{{ q2.longitude }}" readonly></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="submit"></td>
+        </tr>
+    </table>
+</form>
+{% else %}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>Point Name</th>
+            <td><input type="text" name="point_name"></td>
+        </tr>
+        <tr>
+            <th>Stop No</th>
+            <td><input type="number" name="stop_no"></td>
+        </tr>
+        <tr>
+            <th>Charges</th>
+            <td>
+                <select name="charges" required>
+                    <option value="">Select Charges</option>
+                    <option value="15">15</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Latitude</th>
+            <td><input type="text" name="latitude" id="slati" class="form-control"></td>
+            <td><a onclick="myFunction()" required>View Map</a></td>
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            <td><input type="text" name="longitude" id="elongi" required class="form-control"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="submit"></td>
+        </tr>
+    </table>
+</form>
+ <table>
+        <tr>
+            <th>#</th>
+            <th>Route</th>
+            <th>Point Name</th>
+            <th>Stop Number</th>
+            <th>Charge</th>
+            <th>Action</th>
+        </tr>
+        {% for i in q1 %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.ROUTE.routes_start }} to {{ i.ROUTE.routes_End }}</td>
+            <td>{{ i.point_name }}</td>
+            <td>{{ i.stop_no }}</td>
+            <td>{{ i.charge }}</td>
+            <td><a href="/update_stops/{{i.id}}">Update</a></td>
+            <td><a href="/delete_stops/{{i.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="col6" style="margin-left: 500px; margin-top:-300px">
+        <div id="dvMap" style="width: 300px; height: 300px;"></div>
+    </div>
+{% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+<script type="text/javascript">
+    function myFunction() {
+        var mapOptions = {
+            center: new google.maps.LatLng(9.9763482, 76.286272),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var infoWindow = new google.maps.InfoWindow();
+        var latlngbounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        google.maps.event.addListener(map, 'click', function (e) {
+            alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+            document.getElementById('slati').value = e.latLng.lat();
+            document.getElementById('elongi').value = e.latLng.lng();
+        });
+    }
+</script>
+
+
+   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% include 'footer.html' %}

@@ -1,0 +1,102 @@
+{% include 'admin/admin_header.html' %}
+<br><br><br><br><br><br><br>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    a {
+        color: blue;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    html {
+        font-family: "didot";
+    }
+
+    .vertical-text {
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: 1;
+        font-weight: bolder
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .btn-container a {
+        margin-right: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1">
+            <h1 class="vertical-text rotate-180">View Owner Profile</h1>
+        </div>
+        <div class="col-lg-11">
+            <div class="container mt-5">
+                <div class="row">
+                    {% for i in q %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="static/{{ i.photo }}" class="card-img-top" alt="{{ i.owner_name }}'s Photo">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ i.owner_name }}</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-phone-alt"></i> {{ i.contact_number }}</li>
+                                    <li><i class="fas fa-map-marker-alt"></i> {{ i.place }}, {{ i.city }}, {{ i.district }}</li>
+                                    <li><i class="fas fa-mail-bulk"></i> {{ i.post }}</li>
+                                    <li><i class="fas fa-map-pin"></i> {{ i.pincode }}</li>
+                                </ul>
+                                <div class="btn-container">
+                                    <a href="static/{{ i.id_proof }}" download class="text-success"><i class="fas fa-download"></i> Download Idproof</a>
+                                    {% if i.status == 'pending' %}
+                                        <a href="owner_approve/{{ i.LOGIN_id }}" class="text-success" ><i class="fas fa-check"></i> Approve</a>
+                                        <a href="owner_reject/{{ i.LOGIN_id }}" class="text-success" ><i class="fas fa-times"></i> Reject</a>
+                                    {% elif i.status == 'Approved' %}
+                                        <span class="badge badge-success">{{ i.status }}</span>
+                                        <a href="owner_delete/{{ i.LOGIN_id }}" class="text-danger"  onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i> Delete</a>
+                                    {% elif i.status == 'rejected' %}
+                                        <span class="badge badge-danger">{{ i.status }}</span>
+                                        <a href="owner_delete/{{ i.id }}" class="text-danger"  onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash"></i> Delete</a>
+                                    {% endif %}
+                                    <br>
+                                    <a href="/admin_view_bus/{{ i.id }}" ><i class="fas fa-bus"></i> Buses</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+{% include 'footer.html' %}

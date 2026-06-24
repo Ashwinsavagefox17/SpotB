@@ -1,0 +1,210 @@
+{%include 'owner/owner_header.html'  %}
+<br>
+<br>
+<br>
+<br>
+<br>
+ 
+
+
+<style>
+    body {
+
+          background-image: url("static/img/b1.png");
+          background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(0, 0, 0, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+
+
+    html {
+        font-family: "didot";
+    }
+
+    h2 {
+        font-size: 60px;
+        margin: 80px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: .9;
+   
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <h2 class="text-dark text-left rotate"> MANAGE BUS</h2>
+
+        </div>
+        <div class="col-lg">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            {% if q2 %}
+
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <th>Bus Number</th>
+                        <td><input type="text" name="bus_number" value="{{q2.bus_number}}"  required></td>
+                    </tr>
+                    <tr>
+                        <th>Bus Name</th>
+                        <td><input type="text" name="bus_name" value="{{q2.bus_name}}"  required></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" name="submit" value="Update"></td>
+                    </tr>
+                </table>
+            </form>
+            {% else %}
+            <form  method="post">
+                <table>
+                    <tr>
+                        <th>Bus Number</th>
+                        <td><input type="text" name="bus_number"   required></td>
+                    </tr>
+                    <tr>
+                        <th>Bus Name</th>
+                        <td><input type="text" name="bus_name"   required></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" name="submit"></td>
+                    </tr>
+                </table>
+            </form>
+
+
+
+
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Bus Number</th>
+                    <th>Bus Name</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
+            
+                </tr>
+                {% for i in q %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.bus_number}}</td>
+                    <td>{{i.bus_name}}</td>
+                    <td><a href="/update_bus/{{i.id}}">Update</a></td>
+                    <td><a href="/delete_bus/{{i.id}}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                    <td><a href="/allocate_bus/{{i.id}}">Allocate Bus</a></td>
+            
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+{%include 'footer.html'  %}
+

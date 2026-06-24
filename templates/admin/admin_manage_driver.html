@@ -1,0 +1,299 @@
+{% include 'admin/admin_header.html' %}
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-lg-1">
+        <div>
+            <h2 class="text-dark text-left rotate"> Registration Driver</h2>
+
+        </div>
+    </div>
+    <div class="col-lg-11">
+
+        {% if q1 %}
+        <form action="" method="post" enctype="multipart/form-data" class="m-5">
+            <table align="center">
+                <tr>
+                    <th>Driver name</th>
+                    <td><input type="text" name="driver_name" placeholder="Driver name" value="{{q1.driver_name}}"
+                            required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td><input type="text" name="contact_number" placeholder="Contact" value="{{q1.contact_number}}"
+                            required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Place</th>
+                    <td><input type="text" name="place" placeholder="Place" value="{{q1.place}}" required></td>
+                </tr>
+                <tr>
+                    <th>Post</th>
+                    <td><input type="text" name="post" placeholder="Post" value="{{q1.post}}" required></td>
+                </tr>
+                <tr>
+                    <th>Pincode</th>
+                    <td><input type="text" name="pincode" placeholder="Pincode" value="{{q1.pincode}}" required></td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td><input type="text" name="city" placeholder="City" value="{{q1.city}}" required></td>
+                </tr>
+                <tr>
+                    <th>District</th>
+                    <td><input type="text" name="district" placeholder="District" value="{{q1.district}}" required></td>
+                </tr>
+                <tr>
+                    <th>Photo</th>
+                    <td><input type="file" name="photo" value="{{q1.photo}}"></td>
+                </tr>
+                <tr>
+                    <th>License</th>
+                    <td><input type="file" name="licenses" accept="application/pdf" value="{{q1.licenses}}"></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td align="center" colspan="">
+                        <input type="submit" name="submit" value="Update">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        {% else %}
+
+        <form action="" method="post" enctype="multipart/form-data" class="m-5">
+            <table align="center">
+                <tr>
+                    <th>Driver name</th>
+                    <td><input type="text" name="driver_name" placeholder="Driver name" required></td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>
+                        <input type="number" name="contact_number" placeholder="Contact" maxlength="10" pattern="\d{10}"
+                            required title="Please enter a 10-digit contact number">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Place</th>
+                    <td><input type="text" name="place" placeholder="Place" required></td>
+                </tr>
+                <tr>
+                    <th>Post</th>
+                    <td><input type="text" name="post" placeholder="Post" required></td>
+                </tr>
+                <tr>
+                    <th>Pincode</th>
+                    <td><input type="text" name="pincode" placeholder="Pincode" minlength="6" required></td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td><input type="text" name="city" placeholder="City" required></td>
+                </tr>
+                <tr>
+                    <th>District</th>
+                    <td><input type="text" name="district" placeholder="District" required></td>
+                </tr>
+                <tr>
+                    <th>Photo</th>
+                    <td><input type="file" name="photo" required></td>
+                </tr>
+                <tr>
+                    <th>License</th>
+                    <td><input type="file" name="licenses" accept="application/pdf" required></td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td><input type="text" name="username" required></td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td><input type="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td align="center" colspan="">
+                        <input type="submit" name="submit" value="Register">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+</div>
+
+
+
+<div class="container m-5">
+    <div class="row m-5">
+        {% for i in q %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="static/{{ i.photo }}" class="card-img-top" width="250px" alt="Driver Photo">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.driver_name }}</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone-alt"></i> {{ i.contact_number }}</li>
+                        <li><i class="fas fa-map-marker-alt"></i> {{ i.place }}, {{ i.city }}, {{ i.district }}</li>
+                    </ul>
+                    <div class="btn-container">
+                        <a href="static/{{ i.licenses }}" class=""><i class="fas fa-download"></i> Download</a>
+                        <a href="driver_update/{{ i.id }}" class=""><i class="fas fa-pencil-alt"></i> Update</a>
+                        <a href="driver_delete/{{ i.id }}" class=""><i class="fas fa-trash"></i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    html {
+        font-family: "didot";
+    }
+
+    h2 {
+        font-size: 80px;
+        margin: 70px;
+        writing-mode: vertical-lr;
+        text-align: center;
+        line-height: .9;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+
+
+
+    body {
+        /* background-image: url("static/img/b2.jpg"); */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 140vh;
+        /* Ensures the background covers the full viewport height */
+        margin: 0;
+    }
+
+    .card-img-top {
+        width: 25%;
+        border-radius: 50%;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card {
+        padding: 1.5em 0.5em 0.5em;
+        text-align: center;
+        border-radius: 2em;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .btn-primary {
+        border-radius: 2em;
+        /* padding: 0.5em 1.5em; */
+    }
+
+    /* ------------------------------------------- */
+
+    body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    form {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background-color: #1b1750;
+        color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: rgba(34, 31, 70, 0.108);
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #2980b9;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 600px) {
+        table {
+            width: 1200px;
+        }
+
+        th,
+        td {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+
+{% endif %}
+
+
+
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,151 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    Owner Registration
+    <form action="" method="post" enctype="multipart/form-data">
+        <table align="center">
+            <tr>
+                <th>Owner name</th>
+                <td><input type="text" name="ower_name" placeholder="Driver name" required></td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>
+                    <input type="number" name="contact_number" placeholder="Contact" maxlength="10" pattern="\d{10}" required
+                        title="Please enter a 10-digit contact number">
+                </td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td><input type="text" name="place" placeholder="Place" required></td>
+            </tr>
+            <tr>
+                <th>Post</th>
+                <td><input type="text" name="post" placeholder="Post" required></td>
+            </tr>
+            <tr>
+                <th>Pincode</th>
+                <td><input type="text" name="pincode" placeholder="Pincode" minlength="6" required></td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td><input type="text" name="city" placeholder="City" required></td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td><input type="text" name="district" placeholder="District" required></td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><input type="file" name="photo" required></td>
+            </tr>
+            <tr>
+                <th>Id proof</th>
+                <td><input type="file" name="id_proof" accept="application/pdf" required></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" required></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td align="center" colspan="">
+                    <input type="submit" class="btn btn-primary m-3" name="submit" value="Register">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html> -->
+
+
+<!DOCTYPE html><html lang="en"><head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/login/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/login/css/style.css">
+    <script defer="" referrerpolicy="origin" src="static/login/js/script.js"></script>
+    <script nonce="bfb9f810-b706-4fdc-b94e-be4baab79885">try{(function(w,d){!function(c,d,e,f){if(c.zaraz)console.error("zaraz is loaded twice");else{c[e]=c[e]||{};c[e].executed=[];c.zaraz={deferred:[],listeners:[]};c.zaraz._v="5714";c.zaraz.q=[];c.zaraz._f=function(g){return async function(){var h=Array.prototype.slice.call(arguments);c.zaraz.q.push({m:g,a:h})}};for(const i of["track","set","debug"])c.zaraz[i]=c.zaraz._f(i);c.zaraz.init=()=>{var j=d.getElementsByTagName(f)[0],k=d.createElement(f),l=d.getElementsByTagName("title")[0];l&&(c[e].t=d.getElementsByTagName("title")[0].text);c[e].x=Math.random();c[e].w=c.screen.width;c[e].h=c.screen.height;c[e].j=c.innerHeight;c[e].e=c.innerWidth;c[e].l=c.location.href;c[e].r=d.referrer;c[e].k=c.screen.colorDepth;c[e].n=d.characterSet;c[e].o=(new Date).getTimezoneOffset();if(c.dataLayer)for(const p of Object.entries(Object.entries(dataLayer).reduce(((q,r)=>({...q[1],...r[1]})),{})))zaraz.set(p[0],p[1],{scope:"page"});c[e].q=[];for(;c.zaraz.q.length;){const s=c.zaraz.q.shift();c[e].q.push(s)}k.defer=!0;for(const t of[localStorage,sessionStorage])Object.keys(t||{}).filter((v=>v.startsWith("_zaraz_"))).forEach((u=>{try{c[e]["z_"+u.slice(7)]=static/login/jsON.parse(t.getItem(u))}catch{c[e]["z_"+u.slice(7)]=t.getItem(u)}}));k.referrerPolicy="origin";k.src="/cdn-cgi/zaraz/s.static/login/js?z="+btoa(encodeURIComponent(static/login/jsON.stringify(c[e])));j.parentNode.insertBefore(k,j)};["complete","interactive"].includes(d.readyState)?zaraz.init():c.addEventListener("DOMContentLoaded",zaraz.init)}}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script></head>
+    <body class="img static/login/js-fullheight" style="background-image: url(static/img/busbg2.jpg);">
+    <section class="ftco-section">
+    <div class="container">
+    <div class="row justify-content-center">
+    <a href="/">Home</a>
+    <div class="col-md-6 text-center mb-5">
+    
+    </div>
+    </div>
+    <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+    <div class="login-wrap p-0">
+    <h3 class="mb-4 text-center">Register your account?</h3>
+    <form class="signin-form" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+        <input type="text" class="form-control" name="ower_name" placeholder="Owner name" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="contact_number" placeholder="Contact" maxlength="10" pattern="\d{10}" required="" title="Please enter a 10-digit contact number">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="place" placeholder="Place" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="post" placeholder="Post" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="pincode" placeholder="Pincode" minlength="6" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="city" placeholder="City" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="district" placeholder="District" required="">
+        </div>
+        <div class="form-group">
+            <label for="photoInput">Upload Photo</label>
+        <input class="form-control" type="file" name="photo" placeholder="Photo" required="">
+        </div>
+        <div class="form-group">
+            <label for="photoInput">Upload Idproof</label>
+        <input class="form-control" type="file" name="id_proof" accept="application/pdf" required="">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="username" placeholder="Username" required="">
+        </div>
+        <div class="form-group">
+        <input id="password-field" type="password" name="password" class="form-control" placeholder="Password" required="">
+        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+        </div>
+        <div class="form-group">
+        <button type="submit" name="submit" class="form-control btn btn-primary submit px-3" value="Register">Register</button>
+        </div>
+        
+        </div>
+    </form>
+     <p class="w-100 text-center text-light"></p>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    <script src="static/login/js/jquery.min.static/login/js"></script>
+    <script src="static/login/js/popper.static/login/js"></script>
+    <script src="static/login/js/bootstrap.min.static/login/js"></script>
+    <script src="static/login/js/main.static/login/js"></script>
+    <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{" rayid":"89e48c96def79ff6","version":"2024.4.1","token":"cd0b4b3a733644fc843ef0b185f98241"}"="" crossorigin="anonymous"></script>
+    
+    
+    </body></html>
